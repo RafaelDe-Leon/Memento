@@ -402,7 +402,7 @@ This note was generated as a sample response.`
               }}
             />
             <Label htmlFor="contactPurpose-resource" className="font-normal">
-              Resource Coordination
+              Resource Test
             </Label>
           </div>
         </div>
