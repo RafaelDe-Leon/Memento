@@ -2,6 +2,10 @@ import { NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe"
 import { headers } from "next/headers"
 
+// This is needed for Stripe webhook verification which requires the raw body
+export const dynamic = "force-dynamic"
+export const runtime = "nodejs"
+
 export async function POST(request: Request) {
   const body = await request.text()
   const signature = headers().get("stripe-signature") || ""
@@ -62,10 +66,4 @@ export async function POST(request: Request) {
     console.error(`Error handling webhook: ${error}`)
     return NextResponse.json({ error: "Webhook handler failed" }, { status: 500 })
   }
-}
-
-export const config = {
-  api: {
-    bodyParser: false, // Don't parse the body, we need the raw body for signature verification
-  },
 }
